@@ -16,6 +16,9 @@ public class LocalExchangeRateRepository implements IExchangeRateRepository {
 
     @Override
     public void setExchangeRate(CurrencyExchangeRate currencyExchangeRate) {
+        // Remove if conversion exists
+        exchangeRates.removeIf(rate -> rate.getSourceCurrency().equals(currencyExchangeRate.getSourceCurrency()) &&
+                rate.getTargetCurrency().equals(currencyExchangeRate.getTargetCurrency()));
         exchangeRates.add(currencyExchangeRate);
     }
 
